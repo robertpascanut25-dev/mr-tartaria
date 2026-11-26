@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mr. Tartaria</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;background:#080b12;color:#e8eaf0;
+  font-family:Arial,sans-serif;
+}
+header{
+  padding:22px 18px;background:#101522;
+  border-bottom:1px solid #293044;
+}
+.logo{font-size:27px;font-weight:bold;color:#d4b0ff}
+header p{color:#9ba5ba;margin:8px 0 0}
+main{max-width:750px;margin:auto;padding:18px}
+.hero{text-align:center;padding:25px 0}
+.hero h1{font-size:30px;margin:10px 0}
+.hero p{color:#aab3c5;line-height:1.6}
+.badge{
+  display:inline-block;padding:7px 12px;
+  border:1px solid #554071;border-radius:20px;
+  color:#d4b0ff;font-size:12px;
+}
+#chat{
+  background:#101522;border:1px solid #293044;
+  border-radius:16px;padding:15px;min-height:300px;
+}
+.msg{
+  padding:12px 14px;border-radius:13px;
+  margin:10px 0;line-height:1.5;white-space:pre-wrap;
+}
+.bot{background:#20283a;margin-right:15px}
+.user{background:#49346b;margin-left:35px}
+form{display:flex;gap:8px;margin-top:12px}
+input{
+  flex:1;min-width:0;background:#171d2b;
+  border:1px solid #394258;border-radius:12px;
+  padding:14px;color:white;font-size:16px;
+}
+button{
+  border:0;border-radius:12px;padding:14px 18px;
+  background:#9b6de0;color:white;font-weight:bold;
+}
+button:active{opacity:.7}
+.note{font-size:12px;color:#8993a8;line-height:1.5}
+footer{text-align:center;color:#657087;padding:25px;font-size:12px}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">✦ MR. TARTARIA</div>
+  <p>Investigación histórica independiente</p>
+</header>
+<main>
+  <section class="hero">
+    <span class="badge">ARCHIVO DE INVESTIGACIÓN</span>
+    <h1>Busca lo que otros no investigan</h1>
+    <p>Mapas antiguos · Civilizaciones · Antártida · Arquitectura · Historia</p>
+  </section>
+
+  <div id="chat">
+    <div class="msg bot">
+      Soy Mr. Tartaria.
+
+      Podemos investigar mapas antiguos, edificios históricos,
+      tecnologías del pasado y teorías sobre civilizaciones desaparecidas.
+
+      Pregúntame por un tema para comenzar.
+    </div>
+  </div>
+
+  <form id="form">
+    <input id="question" placeholder="Escribe tu pregunta..." autocomplete="off">
+    <button type="submit">Enviar</button>
+  </form>
+
+  <p class="note">
+    Prototipo gratuito. Esta primera versión no está conectada
+    a un modelo de inteligencia artificial ni a Internet.
+    Sus respuestas son orientativas y no sustituyen una investigación
+    con fuentes originales.
+  </p>
+</main>
+<footer>MR. TARTARIA · ARCHIVO ABIERTO</footer>
+
+<script>
+const chat = document.getElementById("chat");
+const form = document.getElementById("form");
+const input = document.getElementById("question");
+
+function addMessage(text, type) {
+  const div = document.createElement("div");
+  div.className = "msg " + type;
+  div.textContent = text;
+  chat.appendChild(div);
+  chat.scrollTop = chat.scrollHeight;
+}
+
+function answer(q) {
+  const t = q.toLowerCase();
+
+  if(t.includes("tartaria") || t.includes("tartaria")) {
+    return "Para investigar Tartaria, podemos buscar mapas históricos, documentos de época y registros de arquitectura. La palabra Tartaria aparece en mapas antiguos como una denominación geográfica de regiones de Asia. Para evaluar una teoría concreta, necesitamos una fuente, fecha y lugar verificables.";
+  }
+
+  if(t.includes("antártida") || t.includes("antartida")) {
+    return "La Antártida contiene montañas, valles y cuencas bajo el hielo. Podemos investigar expediciones, mapas, fotografías y archivos históricos. ¿Qué lugar o documento concreto quieres examinar?";
+  }
+
+  if(t.includes("alien") || t.includes("extraterrest")) {
+    return "Podemos investigar informes de fenómenos aéreos no identificados, testimonios y documentos desclasificados. Un informe de algo no identificado no demuestra por sí solo un origen extraterrestre. Lo importante es revisar la evidencia original.";
+  }
+
+  if(t.includes("edificio") || t.includes("enterrad") || t.includes("barro")) {
+    return "Para analizar un edificio aparentemente enterrado, necesitamos identificar la ubicación, la fecha de la fotografía y si existen imágenes anteriores o planos. Así podemos comparar las hipótesis con evidencias.";
+  }
+
+  if(t.includes("mapa")) {
+    return "Podemos comparar mapas antiguos con mapas actuales. Hay que revisar el año, el cartógrafo, la escala, la proyección y qué significaban los nombres geográficos en esa época.";
+  }
+
+  return "Este prototipo todavía no tiene una IA conectada. Para investigar tu pregunta, necesitamos añadir un modelo gratuito y un buscador de fuentes. Guarda tu pregunta y la incorporaremos cuando conectemos la inteligencia artificial.";
+}
+
+form.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const q = input.value.trim();
+  if(!q) return;
+
+  addMessage(q, "user");
+  input.value = "";
+
+  setTimeout(() => {
+    addMessage(answer(q), "bot");
+  }, 300);
+});
+</script>
+</body>
+</html>
